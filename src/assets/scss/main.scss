@@ -1,0 +1,28 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    color: $dark;
+    margin: 0;
+    font-size: 16px;
+    font-family: Apple Chancery, cursive;
+  }
+  
+  .container {
+    width: calc(100% - 32px);
+    max-width: 1152px;
+    margin: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @keyframes fadeIn {
+    0% { 
+      opacity: 0; 
+    }
+    100% { 
+      opacity: 1; 
+    }
+  }
+  
