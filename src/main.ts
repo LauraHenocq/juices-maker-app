@@ -3,8 +3,8 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
-
-import './assets/main.css';
+import Toasted from '@/plugins/toasted.js';
+import '@/assets/scss/main.scss';
 
 const app = createApp(App);
 
@@ -19,5 +19,5 @@ Object.entries(globalComponentsPaths).forEach(([path, module]) => {
 
 app.use(createPinia());
 app.use(router);
-
+app.use(Toasted);
 app.mount('#app');

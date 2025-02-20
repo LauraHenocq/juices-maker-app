@@ -20,5 +20,6 @@ const preparationTime = computed(() => {
   <div class="recipe-information">
     <p>{{ recipe.quantityOfJuice }}</p>
     <p>{{ preparationTime }}</p>
+    <Season :season="recipe.season" />
   </div>
 </template>

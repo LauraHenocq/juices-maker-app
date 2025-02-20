@@ -6,14 +6,17 @@ import { GetRecipeListParams } from '@/services/JuicesService';
 import type { Ref } from 'vue';
 import RecipeCardsList from '@/components/recipes/RecipeCardsList.vue';
 import CommonTitle from '@/components/common/Title.vue';
+import Loader from '@/components/common/Loader.vue';
+import { useToasted } from '@/composables/common/useToasted';
+import { useRoute } from 'vue-router';
 
 const limit: Ref<number> = ref(6);
 const isPending: Ref<Boolean> = ref(false);
 const isError: Ref<Boolean> = ref(false);
 const recipeList: Ref<Recipe[] | []> = ref([]);
 
-import { useRoute } from 'vue-router';
 const route = useRoute(); 
+const toasted = useToasted();
 
 async function getRecipeList(): Promise<void> {
   isError.value = false;
@@ -26,9 +29,9 @@ async function getRecipeList(): Promise<void> {
   isPending.value = true;
   try {
     recipeList.value = await juicesService.getRecipeList(params);
-  } catch (err) {
+  } catch {
     isError.value = true;
-    throw err;
+    toasted.error('Une erreur est survenue lors de la récupération des recettes');
   } finally {
     isPending.value = false;
   }
@@ -44,6 +47,7 @@ onMounted(async () => {
       Retrouve des recettes originales selon tes fruits et légumes préférés
     </CommonTitle>
     <div v-if="isPending">
+      <Loader />
       <p>Chargement en cours...</p>
     </div>
     <div v-else-if="isError">

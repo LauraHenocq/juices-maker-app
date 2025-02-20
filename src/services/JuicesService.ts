@@ -38,7 +38,7 @@ class JuicesService {
 
   async getRecipe(params: any): Promise<Recipe | null> {
     const request = {
-      url: '/recipes',
+      url: `/recipes/:${params.id}`,
       params
     };
 
