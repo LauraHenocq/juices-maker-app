@@ -1,7 +1,7 @@
 import { EmptyError } from '@/error/EmptyError'
 
 type RecipeApiProps = {
-  id: string;
+  _id: string;
   title: string;
   preparation: string;
   quantityOfJuice: string;
@@ -60,7 +60,7 @@ export class Recipe {
   }
 
   constructor (
-    id: string,
+    _id: string,
     title: string,
     preparation: string,
     quantityOfJuice: string,
@@ -69,7 +69,7 @@ export class Recipe {
     description: string,
     goodToKnow: string,
   ) {
-    this._id = id,
+    this._id = _id,
     this._title = title,
     this._preparation = preparation,
     this._quantityOfJuice = quantityOfJuice,
@@ -87,7 +87,7 @@ export class Recipe {
     }
 
     return new Recipe(
-      apiProps.id,
+      apiProps._id,
       apiProps.title,
       apiProps.preparation,
       apiProps.quantityOfJuice,

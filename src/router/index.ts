@@ -25,8 +25,16 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('@/views/recipes/index.vue')
+    },
+    {
+      path: '/recipes/:id',
+      name: 'recipe',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('@/views/recipes/recipe.vue')
     }
   ]
 })
 
-export default router
+export default router;

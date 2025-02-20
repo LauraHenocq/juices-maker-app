@@ -3,7 +3,7 @@ import { EmptyError } from '@/error/EmptyError'
 import { ValidationError } from '@/error/ValidationError'
 
 type GroceryApiProps = {
-  id: string;
+  _id: string;
   name: string;
   image: string;
   type: GroceryType;
@@ -71,7 +71,7 @@ export class Grocery {
     }
 
     return new Grocery(
-      apiProps.id,
+      apiProps._id,
       apiProps.name,
       apiProps.image,
       apiProps.type,

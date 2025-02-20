@@ -14,7 +14,7 @@ const { recipe, border } = defineProps({
 
 
 const goToRecipe = computed(() => {
-    return `/recipes?name=${recipe.title.toLowerCase().replaceAll(' ', '-')}`;
+  return `/recipes/${recipe.id}`;
 });
 
 const preparationTime = computed(() => {

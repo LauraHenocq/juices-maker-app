@@ -1,5 +1,6 @@
 {
   "name": "juices-maker-app",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,10 +14,12 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "browserslist-to-esbuild": "^2.1.1",
     "pinia": "^2.0.32",
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "vite-svg-loader": "^4.0.0",
+    "vite-tsconfig-paths": "^5.1.4",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
