@@ -38,13 +38,13 @@ class JuicesService {
 
   async getRecipe(params: any): Promise<Recipe | null> {
     const request = {
-      url: `/recipes/:${params.id}`,
+      url: `/recipes/${params.id}`,
       params
     };
 
     const response = await this.apiClient.sendRequest(request);
 
-    return Recipe.fromApi(response.data[0]) ?? null;
+    return Recipe.fromApi(response.data) ?? null;
   }
 }
 

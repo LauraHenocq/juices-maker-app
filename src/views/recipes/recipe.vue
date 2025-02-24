@@ -49,7 +49,7 @@ onMounted(async () => {
       <p>Chargement en cours...</p>
     </div>
     <div v-else-if="isError">
-      <p>Une erreur est survenue lors du chargement des données</p>
+      <p class="center">Une erreur est survenue lors du chargement des données</p>
     </div>
     <RecipeInformation v-else-if="recipe" :recipe="recipe" />
   </div>

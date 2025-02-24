@@ -11,7 +11,7 @@ type RecipeApiProps = {
   goodToKnow: string; 
 }
 
-type GroceryItem = {
+export type GroceryItem = {
   grocery_id: string;
   name: string;
   quantity: number;

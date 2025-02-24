@@ -23,13 +23,13 @@ const Toasted = {
         }
       },
       error(label, timeout) {
-        this.show('red', label, timeout);
+        this.show('#FD4A15', label, timeout);
       },
       success(label, timeout) {
-        this.show('green', label, timeout);
+        this.show('$primary', label, timeout);
       },
       warning(label, timeout) {
-        this.show('orange', label, timeout);
+        this.show('#EA8444', label, timeout);
       },
     };
 

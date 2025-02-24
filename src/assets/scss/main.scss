@@ -27,6 +27,24 @@ body {
   }
 }
 
+.center {
+  text-align: center;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+}
+
 a {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
