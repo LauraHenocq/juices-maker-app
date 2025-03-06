@@ -1,6 +1,7 @@
 import { EmptyError } from '@/error/EmptyError'
+import { Favorite, FavoriteType } from './Favorite';
 
-type RecipeApiProps = {
+export type RecipeApiProps = {
   _id: string;
   title: string;
   preparation: string;
@@ -98,7 +99,28 @@ export class Recipe {
     );
   }
 
+  public toApi (): RecipeApiProps {
+    return {
+      _id: this.id,
+      title: this.title,
+      preparation: this.preparation,
+      quantityOfJuice: this.quantityOfJuice,
+      ingredients: this.ingredients,
+      description: this.description,
+      season: this.season,
+      goodToKnow: this.goodToKnow
+    };
+  }
+
   public equals (recipe: Recipe) {
     return this.id === recipe.id;
+  }
+
+  private isInFavorites(favorites: Favorite[] | []): Boolean {
+    return favorites.length ? favorites.some(
+      favorite => favorite.type === FavoriteType.recipes && 
+        favorite.item.constructor === Recipe && 
+          favorite.item.title === this.title) 
+            : false;
   }
 }

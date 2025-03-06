@@ -19,6 +19,16 @@ class ApiClient {
         }
         return responseToReturn;
     }
+
+    async post(url: string, params: any) {
+        let responseToReturn = { data: {}, status: 500 };
+        try {
+            responseToReturn = await this.axios.post(url, params);
+        } catch (error) {
+            throw error;
+        }
+        return responseToReturn;
+    }
 }
 
 export default ApiClient; 

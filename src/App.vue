@@ -1,9 +1,23 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { Ref } from 'vue';
 import Menu from '@/components/common/menu/Menu.vue';
 import type { MenuItem } from '@/types/MenuItem';
+import { useFavoritesStore } from '@/stores/favorites.store';
+import { useToasted } from '@/composables/common/useToasted';
+const { getFavorites } = useFavoritesStore();
+const toasted = useToasted();
+
+onMounted(async () => {
+  try {
+    const params = { limit: 6 };
+    await getFavorites(params);
+  } catch(err) {
+    console.log(err);
+    toasted.warning('Une erreur est survenue lors de la récupération des favoris');
+  } 
+});
 
 const menuToDisplay: Ref<MenuItem[]> = ref([
   {

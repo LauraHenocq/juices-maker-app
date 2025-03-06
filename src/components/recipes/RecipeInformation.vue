@@ -4,6 +4,9 @@ import { computed }  from 'vue';
 import Season from '@/components/common/Season.vue';
 import IngredientList from '@/components/common/IngredientList.vue';
 import AddToFavoritesButton from '@/components/common/AddToFavoritesButton.vue';
+import { useFavoritesStore } from '@/stores/favorites.store';
+
+const { favorites, addToFavorites } = useFavoritesStore();
   
 const { recipe } = defineProps({
   recipe: {
@@ -12,8 +15,8 @@ const { recipe } = defineProps({
   }
 });
 
-const addToFavorites = () => {
-  console.log('ajouter la recette aux favoris');
+const addRecipeToFavorites = () => {
+  addToFavorites(recipe);
 };
 
 const preparationTime = computed(() => {
@@ -29,7 +32,7 @@ const preparationTime = computed(() => {
     <p class="no-margin">{{ preparationTime }}</p>
     <div class="flex">
       <Season :label="recipe.season" />
-      <AddToFavoritesButton @addToFavorites="addToFavorites"/>
+      <AddToFavoritesButton @addToFavorites="addRecipeToFavorites" :isInFavorite="recipe.isInFavorites(favorites)"/>
     </div>
     <IngredientList :ingredients="recipe.ingredients"/>
     <p class="no-margin">

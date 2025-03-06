@@ -2,7 +2,7 @@ import type GroceryType from '@/domain/GroceryType'
 import { EmptyError } from '@/error/EmptyError'
 import { ValidationError } from '@/error/ValidationError'
 
-type GroceryApiProps = {
+export type GroceryApiProps = {
   _id: string;
   name: string;
   image: string;
@@ -78,6 +78,17 @@ export class Grocery {
       apiProps.local,
       apiProps.months,
     );
+  }
+
+  public toApi (): GroceryApiProps {
+    return {
+      _id: this.id,
+      name: this.name,
+      image: this.image,
+      type: this.type,
+      local: this.local,
+      months: this.months
+    };
   }
 
   public equals (grocery: Grocery) {

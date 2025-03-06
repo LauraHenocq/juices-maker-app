@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
-const { color } = defineProps({
+
+const { color, isInFavorite } = defineProps({
   color: {
     type: String,
     validator: (val:string) => Object.keys(['green', 'pink', 'purple', 'black']).includes(val),
     default: 'green'
   },
+  isInFavorite: {
+    type: Boolean,
+  }
 });
 
 const getColorButton: ComputedRef<string> = computed(() => {
@@ -34,17 +38,19 @@ const emit = defineEmits(['add-to-favorites']);
 
 const click = () => {
     emit('add-to-favorites');
-}
+};
+
 </script>
 <template>
     <button class="button" @click="click">
-        <span>&#x2605;</span>
+        <span v-if="isInFavorite">&#9829;</span>
+        <span v-else>&#9825;</span>
     </button>
 </template>
 <style scoped lang="scss">
 .button {
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px;
     background-color: v-bind(buttonColor);
     border: 1px solid v-bind(buttonColor);
