@@ -21,9 +21,19 @@ class ApiClient {
     }
 
     async post(url: string, params: any) {
-        let responseToReturn = { data: {}, status: 500 };
+        let responseToReturn = { data: null, status: 500 };
         try {
             responseToReturn = await this.axios.post(url, params);
+        } catch (error) {
+            throw error;
+        }
+        return responseToReturn;
+    }
+
+    async delete(url: string) {
+        let responseToReturn = { data: null, status: 500 };
+        try {
+            responseToReturn = await this.axios.delete(url);
         } catch (error) {
             throw error;
         }

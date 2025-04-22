@@ -4,10 +4,16 @@ import { Recipe } from '@/domain/Recipe';
 import { juicesService } from '@/services';
 import { FavoriteInput, FavoriteType } from '@/services/JuicesService';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export const useFavoritesStore = defineStore('favorites', () => {
   const favorites = ref<Favorite[]>([]);
+
+  const favoritesList = computed(() => favorites.value);
+
+  const handleItemInFavorites = (favorite: Grocery | Recipe): void => {
+    favorite.isInFavorites(favorites.value) ? deleteFromFavorites(favorite.getFavoriteId(favorites.value)) : addToFavorites(favorite);
+  }
 
   const addToFavorites = async (favorite: Grocery | Recipe): Promise<void> => {
     const favoriteInput: FavoriteInput = {
@@ -18,6 +24,22 @@ export const useFavoritesStore = defineStore('favorites', () => {
     try {
       const response = await juicesService.addFavorite(favoriteInput);
       if (response) favorites.value.push(response);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
+  const deleteFromFavorites = async (favoriteId: string): Promise<void> => {
+    try {
+      const response = await juicesService.deleteFavorite(favoriteId);
+      if (response) {
+        favorites.value = favorites.value.reduce((acc, item) => {
+          if (item.id !== favoriteId) {
+              acc.push(item);
+          }
+          return acc;
+        }, []);
+      }
     } catch(err) {
       console.error(err);
     }
@@ -37,9 +59,11 @@ export const useFavoritesStore = defineStore('favorites', () => {
   };
 
   return {
-    favorites,
+    favoritesList,
     setFavorites,
     getFavorites,
     addToFavorites,
+    deleteFromFavorites,
+    handleItemInFavorites,
   };
 });

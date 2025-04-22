@@ -34,10 +34,10 @@ const getColorButton: ComputedRef<string> = computed(() => {
 
 const buttonColor: Ref<string> = ref(getColorButton);
 
-const emit = defineEmits(['add-to-favorites']);
+const emit = defineEmits(['handle-favorite']);
 
 const click = () => {
-    emit('add-to-favorites');
+    emit('handle-favorite');
 };
 
 </script>
@@ -49,19 +49,19 @@ const click = () => {
 </template>
 <style scoped lang="scss">
 .button {
-    color: #fff;
-    font-size: 20px;
-    padding: 10px;
-    background-color: v-bind(buttonColor);
-    border: 1px solid v-bind(buttonColor);
-    border-radius: 50%;
-    transition: all 300ms;
-  }
+  color: #fff;
+  font-size: 20px;
+  padding: 10px;
+  background-color: v-bind(buttonColor);
+  border: 1px solid v-bind(buttonColor);
+  border-radius: 50%;
+  transition: all 300ms;
+}
   
-  .button:hover {
-    background-color: #fff;
-    cursor: pointer;
-    color: v-bind(buttonColor);
-  }
+.button:hover {
+  background-color: #fff;
+  cursor: pointer;
+  color: v-bind(buttonColor);
+}
 
 </style>

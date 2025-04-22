@@ -11,6 +11,14 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/favorites',
+      name: 'favorites',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('@/views/favorites/index.vue')
+    },
+    {
       path: '/season',
       name: 'season',
       // route level code-splitting

@@ -1,6 +1,7 @@
 import type GroceryType from '@/domain/GroceryType'
 import { EmptyError } from '@/error/EmptyError'
 import { ValidationError } from '@/error/ValidationError'
+import { Favorite, FavoriteType } from './Favorite';
 
 export type GroceryApiProps = {
   _id: string;
@@ -93,5 +94,22 @@ export class Grocery {
 
   public equals (grocery: Grocery) {
     return this.id === grocery.id;
+  }
+
+  private isInFavorites(favorites: Favorite[] | []): Boolean {
+    return favorites.length ? favorites.some(
+      favorite => favorite.type === FavoriteType.grocery && 
+        favorite.item.constructor === Grocery && 
+          favorite.item.name === this.name) 
+            : false;
+  }
+  
+  private getFavoriteId(favorites: Favorite[] | []): string | null {
+    const favorite = favorites.find(
+      favorite => favorite.type === FavoriteType.grocery && 
+        favorite.item.constructor === Grocery && 
+          favorite.item.id === this.id);
+      
+    return favorite?.id ?? null;
   }
 }

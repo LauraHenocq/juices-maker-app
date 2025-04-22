@@ -26,7 +26,7 @@ const menuToDisplay: Ref<MenuItem[]> = ref([
   },
   {
     label: 'Mes favoris',
-    link: '/favoris'
+    link: '/favorites'
   },
   {
     label: 'Les fruits et légumes de saisons',

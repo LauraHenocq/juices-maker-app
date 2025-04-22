@@ -25,6 +25,7 @@ class JuicesService {
     this.apiClient = apiClient;
   }
 
+  // GROCERY
   async getGroceryList(params: any): Promise<Grocery[] | []> {
     const request ={
       url: '/grocery',
@@ -47,6 +48,7 @@ class JuicesService {
     return response?.data.length ? response.data.map(Recipe.fromApi) : [];
   }
 
+  // RECIPE
   async getRecipe(params: any): Promise<Recipe | null> {
     const request = {
       url: `/recipes/${params.id}`,
@@ -58,6 +60,7 @@ class JuicesService {
     return Recipe.fromApi(response.data) ?? null;
   }
 
+  // FAVORITES
   async getFavorites(params: any): Promise<Favorite[] | []> {
     const request = {
       url: '/favorites',
@@ -73,6 +76,13 @@ class JuicesService {
 
     const response = await this.apiClient.post(url, params);
     return response?.data ? Favorite.fromApi(response.data) : null;
+  }
+
+  async deleteFavorite(favoriteId: string): Promise<string | null> {
+    const url = `/favorites/${favoriteId}`;
+
+    const response = await this.apiClient.delete(url);
+    return response?.data ?? null;
   }
 }
 

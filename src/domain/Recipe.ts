@@ -94,8 +94,8 @@ export class Recipe {
       apiProps.quantityOfJuice,
       apiProps.ingredients,
       apiProps.season,
-      apiProps.goodToKnow,
       apiProps.description,
+      apiProps.goodToKnow,
     );
   }
 
@@ -122,5 +122,14 @@ export class Recipe {
         favorite.item.constructor === Recipe && 
           favorite.item.title === this.title) 
             : false;
+  }
+
+  private getFavoriteId(favorites: Favorite[] | []): string | null {
+    const favorite = favorites.find(
+      favorite => favorite.type === FavoriteType.recipes && 
+        favorite.item.constructor === Recipe && 
+          favorite.item.id === this.id);
+    
+    return favorite?.id ?? null;
   }
 }

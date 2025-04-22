@@ -3,10 +3,10 @@ import { Recipe } from '@/domain/Recipe';
 import { computed }  from 'vue';
 import Season from '@/components/common/Season.vue';
 import IngredientList from '@/components/common/IngredientList.vue';
-import AddToFavoritesButton from '@/components/common/AddToFavoritesButton.vue';
+import HandleFavoriteButton from '@/components/common/HandleFavoriteButton.vue';
 import { useFavoritesStore } from '@/stores/favorites.store';
 
-const { favorites, addToFavorites } = useFavoritesStore();
+const { handleItemInFavorites, favoritesList } = useFavoritesStore();
   
 const { recipe } = defineProps({
   recipe: {
@@ -15,9 +15,13 @@ const { recipe } = defineProps({
   }
 });
 
-const addRecipeToFavorites = () => {
-  addToFavorites(recipe);
+const handleRecipeInFavorites = () => {
+  handleItemInFavorites(recipe);
 };
+
+const isInFavorite = computed(() => {
+  return recipe.isInFavorites(favoritesList);
+})
 
 const preparationTime = computed(() => {
   const hours = recipe.preparation.hours > 0 ? `${recipe.preparation.hours}h` : '';
@@ -32,13 +36,13 @@ const preparationTime = computed(() => {
     <p class="no-margin">{{ preparationTime }}</p>
     <div class="flex">
       <Season :label="recipe.season" />
-      <AddToFavoritesButton @addToFavorites="addRecipeToFavorites" :isInFavorite="recipe.isInFavorites(favorites)"/>
+      <HandleFavoriteButton @handleFavorite="handleRecipeInFavorites" :isInFavorite="isInFavorite"/>
     </div>
     <IngredientList :ingredients="recipe.ingredients"/>
     <p class="no-margin">
       {{ recipe.description }}
     </p>
-    <p class="recipe-information__good-to-know">
+    <p v-if="recipe.goodToKnow" class="recipe-information__good-to-know">
       <span class="underline">Bon à savoir :</span> {{ recipe.goodToKnow }}
     </p>
   </div>
@@ -48,7 +52,7 @@ const preparationTime = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 
   &__good-to-know {
     border: 1px solid $quaternary;
